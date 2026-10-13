@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Fence Picket and Post Calculator – Estimate Materials Quickly</title><meta name='description' content='Free online tool to calculate needed fence pickets and posts based on length, spacing, and height. Simple, instant results.'><style>*{box-sizing:border-box}body{margin:0;background:#0b0d10;color:#e8eef2;font:17px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif}.w{max-width:760px;margin:0 auto;padding:22px 16px}a{color:#7fd8ff}h1{font-size:1.7em;line-height:1.2}form{display:grid;gap:12px;background:#141920;border:1px solid #243040;border-radius:14px;padding:16px}label{display:grid;gap:4px;font-weight:600}input,select{font:inherit;padding:10px;border-radius:9px;border:1px solid #2c3a4c;background:#0d1117;color:#fff}#out{margin:14px 0;padding:16px;border-radius:14px;background:#0f2a1f;border:1px solid #1f6b4a;font-size:1.15em;font-weight:700}header,footer{color:#8a99a8;font-size:.9em}footer{margin-top:40px;border-top:1px solid #222;padding-top:12px}</style></head><body><div class='w'><header><a href='../../'>Free tools</a></header><h1>Fence Picket and Post Calculator – Estimate Materials Quickly</h1><form id="fenceCalc">
+  <label>
+    Total fence length (ft):
+    <input type="number" id="len" min="0" step="0.1" value="100">
+  </label><br><br>
+  <label>
+    Desired picket spacing (in):
+    <input type="number" id="spacing" min="0" step="0.1" value="6">
+  </label><br><br>
+  <label>
+    Fence height (ft):
+    <input type="number" id="height" min="0" step="0.1" value="4">
+  </label><br><br>
+  <label>
+    Posts per span (ft):
+    <input type="number" id="postSpan" min="0" step="0.1" value="8">
+  </label><br><br>
+</form>
+
+<div id="out">Enter values to see results.</div>
+
+<h3>How it works</h3>
+<p>
+  <strong>Pickets needed:</strong> (Total length × 12 in/ft) ÷ Spacing<br>
+  <strong>Posts needed:</strong> ⌈Total length ÷ Post span⌉ + 1 (extra post at start)
+</p>
+
+<h3>FAQ</h3>
+<ol>
+  <li><strong>What if I have a curved fence?</strong> Use the linear footage along the curve.</li>
+  <li><strong>Do I need extra pickets for corners?</strong> Add one extra picket per corner for a neat finish.</li>
+  <li><strong>Can I change units?</strong> Convert your measurements to feet (length/height) and inches (spacing) before using the calculator.</li>
+</ol><p class='tip'>Useful? <a href='paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function(){
+  const len = document.getElementById('len');
+  const spacing = document.getElementById('spacing');
+  const height = document.getElementById('height');
+  const postSpan = document.getElementById('postSpan');
+  const out = document.getElementById('out');
+
+  function calc(){
+    const L = parseFloat(len.value);
+    const S = parseFloat(spacing.value);
+    const H = parseFloat(height.value);
+    const P = parseFloat(postSpan.value);
+
+    if([L,S,H,P].some(v=>isNaN(v)||v<=0)){
+      out.textContent = 'Please enter positive numbers for all fields.';
+      return;
+    }
+
+    // Pickets: total inches / spacing
+    const totalInches = L * 12;
+    const pickets = Math.ceil(totalInches / S);
+
+    // Posts: spans + one at start
+    const posts = Math.ceil(L / P) + 1;
+
+    out.textContent = `You’ll need approximately ${pickets.toLocaleString()} pickets and ${posts.toLocaleString()} posts for a ${L} ft × ${H} ft fence.`;
+  }
+
+  // Listen to any change in the form
+  document.getElementById('fenceCalc').addEventListener('input', calc);
+  // Initial calculation
+  calc();
+})();</script></body></html>
