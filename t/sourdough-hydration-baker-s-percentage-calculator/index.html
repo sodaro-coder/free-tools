@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Sourdough Hydration &amp; Baker&#x27;s Percentage Calculator</title><meta name='description' content='Calculate sourdough bread hydration and baker percentages easily with this free online tool. Perfect for adjusting flour, water, starter, and salt ratios.'><style>*{box-sizing:border-box}body{margin:0;background:#0b0d10;color:#e8eef2;font:17px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif}.w{max-width:760px;margin:0 auto;padding:22px 16px}a{color:#7fd8ff}h1{font-size:1.7em;line-height:1.2}form{display:grid;gap:12px;background:#141920;border:1px solid #243040;border-radius:14px;padding:16px}label{display:grid;gap:4px;font-weight:600}input,select{font:inherit;padding:10px;border-radius:9px;border:1px solid #2c3a4c;background:#0d1117;color:#fff}#out{margin:14px 0;padding:16px;border-radius:14px;background:#0f2a1f;border:1px solid #1f6b4a;font-size:1.15em;font-weight:700}header,footer{color:#8a99a8;font-size:.9em}footer{margin-top:40px;border-top:1px solid #222;padding-top:12px}</style></head><body><div class='w'><header><a href='../../'>Free tools</a></header><h1>Sourdough Hydration &amp; Baker&#x27;s Percentage Calculator</h1><form id="calc-form">
+  <h2>Sourdough Hydration & Baker's Percentage Calculator</h2>
+  
+  <div>
+    <label for="flour">Total Flour (g):</label>
+    <input type="number" id="flour" value="500" min="1" step="any">
+  </div>
+  
+  <div>
+    <label for="water">Total Water (g):</label>
+    <input type="number" id="water" value="375" min="0" step="any">
+  </div>
+  
+  <div>
+    <label for="starter">Sourdough Starter (g):</label>
+    <input type="number" id="starter" value="100" min="0" step="any">
+  </div>
+  
+  <div>
+    <label for="starter-hydration">Starter Hydration (%):</label>
+    <input type="number" id="starter-hydration" value="100" min="1" max="500" step="any">
+  </div>
+  
+  <div>
+    <label for="salt">Salt (g):</label>
+    <input type="number" id="salt" value="10" min="0" step="any">
+  </div>
+  
+  <div>
+    <label for="oil">Oil / Fat / Sugar (Optional) (g):</label>
+    <input type="number" id="oil" value="0" min="0" step="any">
+  </div>
+</form>
+
+<div id="out"></div>
+
+<section>
+  <h3>How It Works</h3>
+  <p>Baker's percentages express every ingredient as a percentage of the total flour weight, which is always set to 100%. This tool also accounts for the water and flour contained inside your sourdough starter.</p>
+  <p><strong>Formulas:</strong></p>
+  <ul>
+    <li>Ingredient % = (Ingredient Weight / Total Flour Weight) × 100</li>
+    <li>Total Actual Flour = Main Flour + (Starter Weight × [Starter Flour %])</li>
+    <li>Total Actual Water = Main Water + (Starter Weight × [Starter Water %])</li>
+    <li>Dough Hydration % = (Total Actual Water / Total Actual Flour) × 100</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Frequently Asked Questions</h3>
+  <h4>What is dough hydration?</h4>
+  <p>Hydration is the ratio of water to flour in your bread dough. Higher hydration yields a more open, airy crumb with a blistered crust, while lower hydration creates a denser loaf that is easier to shape.</p>
+  <h4>Why include the starter hydration?</h4>
+  <p>Sourdough starter is made of both flour and water (usually a 100% hydration mix of equal parts flour and water). To get an accurate measurement of your total dough hydration, you must account for the water and flour coming from the starter.</p>
+  <h4>How much salt should I use?</h4>
+  <p>Most artisan bread recipes use between 1.8% and 2.2% salt relative to the total flour weight for optimal flavor and gluten structure.</p>
+</section><p class='tip'>Useful? <a href='paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function() {
+  const form = document.getElementById('calc-form');
+  const out = document.getElementById('out');
+
+  function calculate() {
+    const flourInput = parseFloat(document.getElementById('flour').value);
+    const waterInput = parseFloat(document.getElementById('water').value);
+    const starterInput = parseFloat(document.getElementById('starter').value);
+    const starterHydrationInput = parseFloat(document.getElementById('starter-hydration').value);
+    const saltInput = parseFloat(document.getElementById('salt').value);
+    const oilInput = parseFloat(document.getElementById('oil').value);
+
+    if (
+      isNaN(flourInput) || flourInput <= 0 ||
+      isNaN(waterInput) || waterInput < 0 ||
+      isNaN(starterInput) || starterInput < 0 ||
+      isNaN(starterHydrationInput) || starterHydrationInput <= 0 ||
+      isNaN(saltInput) || saltInput < 0 ||
+      isNaN(oilInput) || oilInput < 0
+    ) {
+      out.innerHTML = '<p style="color: red;">Please enter valid, positive numbers for all ingredients.</p>';
+      return;
+    }
+
+    // Calculate starter composition
+    // If starter hydration is H%, then Water = Flour * (H / 100)
+    // Starter Total Parts = 1 + (H / 100)
+    // Starter Flour Weight = Starter Weight / (1 + H / 100)
+    // Starter Water Weight = Starter Weight - Starter Flour Weight
+    const starterHDecimal = starterHydrationInput / 100;
+    const starterFlour = starterInput / (1 + starterHDecimal);
+    const starterWater = starterInput - starterFlour;
+
+    const totalFlour = flourInput + starterFlour;
+    const totalWater = waterInput + starterWater;
+    const totalWeight = flourInput + waterInput + starterInput + saltInput + oilInput;
+
+    const doughHydration = (totalWater / totalFlour) * 100;
+
+    const flourPct = 100;
+    const waterPct = (waterInput / flourInput) * 100;
+    const starterPct = (starterInput / flourInput) * 100;
+    const saltPct = (saltInput / flourInput) * 100;
+    const oilPct = (oilInput / flourInput) * 100;
+
+    out.innerHTML = `
+      <h3>Recipe Summary</h3>
+      <p><strong>Total Dough Weight:</strong> ${totalWeight.toFixed(1)} g</p>
+      <p><strong>Total Actual Flour:</strong> ${totalFlour.toFixed(1)} g</p>
+      <p><strong>Total Actual Water:</strong> ${totalWater.toFixed(1)} g</p>
+      <p><strong>Total Dough Hydration:</strong> ${doughHydration.toFixed(1)}%</p>
+      
+      <h3>Baker's Percentages (relative to ${flourInput.toFixed(1)}g main flour)</h3>
+      <ul>
+        <li>Flour: ${flourPct.toFixed(1)}%</li>
+        <li>Water: ${waterPct.toFixed(1)}%</li>
+        <li>Starter: ${starterPct.toFixed(1)}%</li>
+        <li>Salt: ${saltPct.toFixed(1)}%</li>
+        ${oilInput > 0 ? `<li>Add-ins (Oil/Fat/Sugar): ${oilPct.toFixed(1)}%</li>` : ''}
+      </ul>
+    `;
+  }
+
+  form.addEventListener('input', calculate);
+  calculate();
+})();</script></body></html>
