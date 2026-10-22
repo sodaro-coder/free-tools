@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Candle Wax &amp; Fragrance Oil Calculator – Quick Ratio Tool</title><meta name='description' content='Instantly calculate how much fragrance oil to add to any amount of candle wax. Simple, free, no ads.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Candle Wax &amp; Fragrance Oil Calculator – Quick Ratio Tool</h1><form id="calc">
+  <label>
+    Wax amount (grams):
+    <input type="number" id="wax" min="0" step="0.1" placeholder="e.g., 500" value="500">
+  </label><br><br>
+  <label>
+    Desired fragrance load (% of wax weight):
+    <input type="number" id="load" min="0" max="100" step="0.1" placeholder="e.g., 6" value="6">
+  </label><br><br>
+  <label>
+    Fragrance oil density (g/ml) – leave blank for typical 0.92:
+    <input type="number" id="density" min="0" step="0.01" placeholder="e.g., 0.92" value="0.92">
+  </label>
+</form>
+
+<div id="out" style="margin-top:1em; font-weight:bold;"></div>
+
+<h3>How it works</h3>
+<p>
+  Fragrance = Wax × (Load ÷ 100) (grams)  
+  <br>
+  If you need the volume, divide the grams by the oil density (g/ml).
+</p>
+
+<h3>FAQ</h3>
+<ol>
+  <li><strong>What is “fragrance load”?</strong> The percentage of the total wax weight you want to be fragrance oil.</li>
+  <li><strong>Why does density matter?</strong> Different oils weigh slightly different amounts per milliliter; using the correct density gives an accurate volume.</li>
+  <li><strong>Can I use ounces?</strong> Convert ounces to grams (1 oz ≈ 28.35 g) and enter the gram value.</li>
+</ol><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function(){
+  const waxInput = document.getElementById('wax');
+  const loadInput = document.getElementById('load');
+  const densInput = document.getElementById('density');
+  const out = document.getElementById('out');
+
+  function format(num) {
+    return Number.isFinite(num) ? num.toFixed(2) : '';
+  }
+
+  function calculate() {
+    const wax = parseFloat(waxInput.value);
+    const load = parseFloat(loadInput.value);
+    const density = parseFloat(densInput.value) || 0.92; // default if blank/invalid
+
+    if (isNaN(wax) || wax <= 0) {
+      out.textContent = 'Enter a positive wax amount.';
+      return;
+    }
+    if (isNaN(load) || load < 0) {
+      out.textContent = 'Enter a valid fragrance load (0‑100%).';
+      return;
+    }
+    if (isNaN(density) || density <= 0) {
+      out.textContent = 'Enter a valid oil density.';
+      return;
+    }
+
+    const fragranceGrams = wax * (load / 100);
+    const fragranceMl = fragranceGrams / density;
+
+    out.textContent = `Add ${format(fragranceGrams)} g (${format(fragranceMl)} ml) of fragrance oil.`;
+  }
+
+  // Run on any input change
+  [waxInput, loadInput, densInput].forEach(el => {
+    el.addEventListener('input', calculate);
+  });
+
+  // Initial calculation
+  calculate();
+})();</script></body></html>
