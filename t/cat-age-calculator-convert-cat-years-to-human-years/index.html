@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Cat Age Calculator: Convert Cat Years to Human Years</title><meta name='description' content='Easily convert your cat&#x27;s age into human years with our free online calculator. Learn how feline aging works and get accurate age estimates.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Cat Age Calculator: Convert Cat Years to Human Years</h1><form id="calc-form">
+  <h2>Cat Age Calculator</h2>
+  <p>Find out how old your feline friend is in human years using standard veterinary guidelines.</p>
+
+  <div style="margin-bottom: 15px;">
+    <label for="cat-years">Cat's Age (Years):</label><br>
+    <input type="number" id="cat-years" name="catYears" min="0" max="30" value="2" step="1" style="width: 100%; padding: 8px; margin-top: 5px;">
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label for="cat-months">Additional Months (0-11):</label><br>
+    <input type="number" id="cat-months" name="catMonths" min="0" max="11" value="0" step="1" style="width: 100%; padding: 8px; margin-top: 5px;">
+  </div>
+
+  <div style="background-color: #f4f4f4; padding: 15px; border-radius: 4px; margin-top: 20px;">
+    <h3>Estimated Human Age:</h3>
+    <p id="out" style="font-size: 1.5em; font-weight: bold; margin: 0;">Enter your cat's age above.</p>
+  </div>
+</form>
+
+<section style="margin-top: 30px;">
+  <h3>How It Works</h3>
+  <p>Cats age much faster than humans during the first two years of their lives. The standard calculation used by veterinarians assumes:</p>
+  <ul>
+    <li><strong>Year 1:</strong> Equals approximately 15 human years.</li>
+    <li><strong>Year 2:</strong> Adds another 9 human years (making a 2-year-old cat roughly 24 in human years).</li>
+    <li><strong>Year 3 and beyond:</strong> Each subsequent year adds approximately 4 human years.</li>
+  </ul>
+  <p>Months are factored proportionally based on the rate of the current year.</p>
+</section>
+
+<section style="margin-top: 30px;">
+  <h3>Frequently Asked Questions</h3>
+  
+  <div style="margin-bottom: 15px;">
+    <strong>Q: Is the 1-to-7 ratio accurate for cats?</strong>
+    <p style="margin: 5px 0 0 0;">A: No. The old rule of thumb that one human year equals seven cat years is inaccurate. Cats reach maturity much faster in their first two years of life.</p>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <strong>Q: When is a cat considered a senior?</strong>
+    <p style="margin: 5px 0 0 0;">A: Cats are generally considered senior citizens when they reach 11 years of age, which equates to roughly 60 human years.</p>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <strong>Q: Do indoor cats live longer?</strong>
+    <p style="margin: 5px 0 0 0;">A: Yes, indoor cats typically have a longer lifespan than outdoor cats, which changes how their lifetime spans across human equivalent years.</p>
+  </div>
+</section><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function() {
+  const yearsInput = document.getElementById('cat-years');
+  const monthsInput = document.getElementById('cat-months');
+  const outputArea = document.getElementById('out');
+
+  function calculateHumanAge() {
+    const years = parseInt(yearsInput.value, 10);
+    const months = parseInt(monthsInput.value, 10);
+
+    if (isNaN(years) || isNaN(months) || years < 0 || months < 0) {
+      outputArea.textContent = "Please enter valid positive numbers.";
+      return;
+    }
+
+    if (years === 0 && months === 0) {
+      outputArea.textContent = "0 human years (Newborn)";
+      return;
+    }
+
+    let humanYears = 0;
+    const totalAgeInYears = years + (months / 12);
+
+    if (totalAgeInYears <= 1) {
+      // First year accounts for 15 human years
+      humanYears = totalAgeInYears * 15;
+    } else if (totalAgeInYears <= 2) {
+      // Second year adds 9 human years (total 24 at age 2)
+      humanYears = 15 + ((totalAgeInYears - 1) * 9);
+    } else {
+      // Each year after age 2 adds 4 human years
+      humanYears = 24 + ((totalAgeInYears - 2) * 4);
+    }
+
+    // Round to one decimal place for clarity
+    const roundedAge = Math.round(humanYears * 10) / 10;
+    outputArea.textContent = roundedAge + " human years";
+  }
+
+  yearsInput.addEventListener('input', calculateHumanAge);
+  monthsInput.addEventListener('input', calculateHumanAge);
+
+  // Run on load to set initial value
+  calculateHumanAge();
+})();</script></body></html>
