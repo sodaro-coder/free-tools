@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Dog Food Portion Calculator by Weight &amp; Activity</title><meta name='description' content='Calculate daily dog food portions based on your dog&#x27;s weight, age, and activity level. Free, instant, and easy to use.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Dog Food Portion Calculator by Weight &amp; Activity</h1><form id="calcForm">
+  <label for="dogName">Dog's Name (optional)</label>
+  <input type="text" id="dogName" name="dogName" placeholder="e.g., Buddy" value="">
+
+  <label for="dogWeight">Weight (lbs)</label>
+  <input type="number" id="dogWeight" name="dogWeight" min="1" max="200" step="0.1" placeholder="e.g., 30" value="30">
+
+  <label for="dogAge">Age Category</label>
+  <select id="dogAge" name="dogAge">
+    <option value="puppy">Puppy (under 12 months)</option>
+    <option value="adult" selected>Adult (1-7 years)</option>
+    <option value="senior">Senior (7+ years)</option>
+  </select>
+
+  <label for="activityLevel">Activity Level</label>
+  <select id="activityLevel" name="activityLevel">
+    <option value="low">Low (mostly indoors, short walks)</option>
+    <option value="moderate" selected>Moderate (daily walks, some play)</option>
+    <option value="high">High (running, working, very active)</option>
+  </select>
+
+  <label for="foodCalories">Food Calories per Cup (kcal)</label>
+  <input type="number" id="foodCalories" name="foodCalories" min="100" max="600" step="1" placeholder="e.g., 350" value="350">
+
+  <button type="button" id="calculateBtn">Calculate Portion</button>
+</form>
+
+<div id="out" role="status" aria-live="polite">
+  <p>Enter your dog's details above and the calculator will show the recommended daily cups immediately.</p>
+</div>
+
+<h2>How It Works</h2>
+<p>This tool estimates your dog's daily caloric needs using the Resting Energy Requirement (RER) formula, then adjusts for age and activity level.</p>
+<p><strong>Formula:</strong> Daily Calories = (70 × (Weight in lbs ÷ 2.2)^0.75) × Activity Factor</p>
+<ul>
+  <li><strong>Puppies:</strong> 2.0-3.0x RER (we use 2.5x average)</li>
+  <li><strong>Adults:</strong> 1.4-1.6x RER (we use 1.5x average)</li>
+  <li><strong>Seniors:</strong> 1.2-1.4x RER (we use 1.3x average)</li>
+  <li><strong>Activity Adjustment:</strong> Low = 0.9x, Moderate = 1.0x, High = 1.2x</li>
+</ul>
+<p>Finally, we divide the total daily calories by the calories per cup in your specific food to get the number of cups.</p>
+
+<h2>Frequently Asked Questions</h2>
+<details>
+  <summary>How accurate is this calculator?</summary>
+  <p>This tool provides a general estimate based on standard veterinary guidelines. Individual dogs may need more or less depending on breed, metabolism, health conditions, and specific food digestibility. Always monitor your dog's body condition and consult your veterinarian for personalized feeding advice.</p>
+</details>
+<details>
+  <summary>How should I divide the daily amount?</summary>
+  <p>For most adult dogs, divide the total daily cups into 2 equal meals. Puppies under 6 months should typically eat 3-4 smaller meals. Adjust the number of meals based on your dog's age and appetite, but keep the total daily amount the same.</p>
+</details>
+<details>
+  <summary>What if my dog is overweight or underweight?</summary>
+  <p>If your dog is overweight, start with the calculated amount and reduce by 20-30% while increasing activity. If underweight, start with the calculated amount and increase by 10-20% gradually. Monitor weight weekly and adjust as needed. Your vet can help determine the ideal target weight.</p>
+</details><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function() {
+  const form = document.getElementById('calcForm');
+  const out = document.getElementById('out');
+  const inputs = ['dogName', 'dogWeight', 'dogAge', 'activityLevel', 'foodCalories'];
+  
+  function calculate() {
+    const name = document.getElementById('dogName').value.trim();
+    const weight = parseFloat(document.getElementById('dogWeight').value);
+    const age = document.getElementById('dogAge').value;
+    const activity = document.getElementById('activityLevel').value;
+    const foodCalories = parseFloat(document.getElementById('foodCalories').value);
+    
+    // Validation
+    if (isNaN(weight) || weight <= 0 || weight > 200) {
+      out.innerHTML = '<p style="color: #c0392b;">Please enter a valid weight between 1 and 200 lbs.</p>';
+      return;
+    }
+    
+    if (isNaN(foodCalories) || foodCalories <= 0 || foodCalories > 600) {
+      out.innerHTML = '<p style="color: #c0392b;">Please enter valid food calories between 100 and 600 kcal per cup. Check your food packaging for this number.</p>';
+      return;
+    }
+    
+    // Convert lbs to kg
+    const weightKg = weight / 2.2;
+    
+    // Calculate RER (Resting Energy Requirement)
+    const rer = 70 * Math.pow(weightKg, 0.75);
+    
+    // Age factors
+    let ageFactor;
+    if (age === 'puppy') ageFactor = 2.5;
+    else if (age === 'senior') ageFactor = 1.3;
+    else ageFactor = 1.5;
+    
+    // Activity factors
+    let activityFactor;
+    if (activity === 'low') activityFactor = 0.9;
+    else if (activity === 'high') activityFactor = 1.2;
+    else activityFactor = 1.0;
+    
+    // Calculate daily calories
+    const dailyCalories = rer * ageFactor * activityFactor;
+    
+    // Calculate cups
+    const cupsPerDay = dailyCalories / foodCalories;
+    
+    // Round to 2 decimal places
+    const roundedCups = Math.round(cupsPerDay * 100) / 100;
+    const roundedCalories = Math.round(dailyCalories);
+    
+    // Meal suggestions
+    let mealText = '';
+    if (age === 'puppy') {
+      const meals = weight < 20 ? 4 : 3;
+      const perMeal = (roundedCups / meals).toFixed(2);
+      mealText = `Suggested: ${meals} meals of about ${perMeal} cups each`;
+    } else {
+      const perMeal = (roundedCups / 2).toFixed(2);
+      mealText = `Suggested: 2 meals of about ${perMeal} cups each`;
+    }
+    
+    const displayName = name ? name : 'Your dog';
+    
+    out.innerHTML = `
+      <h3>Recommended Daily Portion for ${displayName}</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><strong>Weight:</strong> ${weight} lbs (${weightKg.toFixed(1)} kg)</li>
+        <li><strong>Age:</strong> ${age.charAt(0).toUpperCase() + age.slice(1)}</li>
+        <li><strong>Activity:</strong> ${activity.charAt(0).toUpperCase() + activity.slice(1)}</li>
+        <li><strong>Daily Calories Needed:</strong> ~${roundedCalories} kcal</li>
+        <li><strong>Food Calories per Cup:</strong> ${foodCalories} kcal</li>
+        <li><strong><em>Daily Cups:</em></strong> <span style="font-size: 1.2em; font-weight: bold;">${roundedCups} cups</span></li>
+        <li><strong>${mealText}</strong></li>
+      </ul>
+      <p style="font-size: 0.9em; color: #666;"><em>Note: This is an estimate. Adjust based on your dog's body condition and consult your veterinarian.</em></p>
+    `;
+  }
+  
+  // Attach event listeners
+  inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    }
+  });
+  
+  document.getElementById('calculateBtn').addEventListener('click', calculate);
+  
+  // Initial calculation
+  calculate();
+})();</script></body></html>
