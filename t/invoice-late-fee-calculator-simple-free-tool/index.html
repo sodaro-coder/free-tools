@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Invoice Late Fee Calculator – Simple Free Tool</title><meta name='description' content='Quickly compute late fees on invoices using your terms. Enter amount, due date, and days overdue for an instant result.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Invoice Late Fee Calculator – Simple Free Tool</h1><form id="feeCalc">
+  <label>
+    Invoice Amount ($):
+    <input type="number" id="amount" min="0" step="0.01" value="1000">
+  </label><br><br>
+  <label>
+    Due Date:
+    <input type="date" id="dueDate" value="">
+  </label><br><br>
+  <label>
+    Days Overdue:
+    <input type="number" id="daysOverdue" min="0" step="1" value="0">
+  </label><br><br>
+  <label>
+    Daily Late Fee Rate (%):
+    <input type="number" id="rate" min="0" step="0.01" value="0.5">
+  </label><br><br>
+  <div>
+    <strong>Late Fee:</strong> <span id="out">—</span>
+  </div>
+</form>
+
+<h3>How it works</h3>
+<p>The calculator uses the formula:</p>
+<pre>Late Fee = Invoice Amount × (Daily Rate / 100) × Days Overdue</pre>
+
+<h3>FAQ</h3>
+<ol>
+  <li><strong>What if I don’t know the exact due date?</strong> You can still enter the number of days overdue directly.</li>
+  <li><strong>Can I use a weekly or monthly rate?</strong> Convert it to a daily percentage (e.g., 15% monthly ≈ 0.5% daily).</li>
+  <li><strong>Is tax included in the late fee?</strong> The calculator works on the gross invoice amount; add any tax separately if needed.</li>
+</ol><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function(){
+  const amount = document.getElementById('amount');
+  const dueDate = document.getElementById('dueDate');
+  const daysOverdue = document.getElementById('daysOverdue');
+  const rate = document.getElementById('rate');
+  const out = document.getElementById('out');
+
+  function calculate(){
+    const amt = parseFloat(amount.value);
+    const rateVal = parseFloat(rate.value);
+    let days = parseInt(daysOverdue.value,10);
+
+    // If days overdue empty, try to compute from due date
+    if (isNaN(days) && dueDate.value){
+      const due = new Date(dueDate.value);
+      const now = new Date();
+      const diff = Math.floor((now - due) / (1000*60*60*24));
+      days = diff > 0 ? diff : 0;
+    }
+
+    if (isNaN(amt) || amt <= 0){
+      out.textContent = 'Enter a positive invoice amount.';
+      return;
+    }
+    if (isNaN(rateVal) || rateVal < 0){
+      out.textContent = 'Enter a valid daily rate.';
+      return;
+    }
+    if (isNaN(days) || days < 0){
+      out.textContent = 'Enter a valid number of overdue days.';
+      return;
+    }
+
+    const fee = amt * (rateVal / 100) * days;
+    out.textContent = '$' + fee.toFixed(2);
+  }
+
+  // Attach listeners
+  [amount, dueDate, daysOverdue, rate].forEach(el => {
+    el.addEventListener('input', calculate);
+  });
+
+  // Initial calculation
+  calculate();
+})();</script></body></html>
