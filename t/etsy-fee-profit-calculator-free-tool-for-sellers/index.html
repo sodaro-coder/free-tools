@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Etsy Fee &amp; Profit Calculator — Free Tool for Sellers</title><meta name='description' content='Calculate Etsy fees, profit, and margin instantly. Includes listing, transaction, payment processing, and offsite ads fees.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Etsy Fee &amp; Profit Calculator — Free Tool for Sellers</h1><form id="calc" class="calculator-form">
+  <fieldset>
+    <legend>Revenue</legend>
+    <div class="field">
+      <label for="salePrice">Sale price (item only) $</label>
+      <input type="number" id="salePrice" name="salePrice" step="0.01" min="0" value="25.00" required>
+    </div>
+    <div class="field">
+      <label for="shipCharged">Shipping charged to buyer $</label>
+      <input type="number" id="shipCharged" name="shipCharged" step="0.01" min="0" value="5.00" required>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Your costs</legend>
+    <div class="field">
+      <label for="cogs">Cost of goods sold $</label>
+      <input type="number" id="cogs" name="cogs" step="0.01" min="0" value="8.00" required>
+    </div>
+    <div class="field">
+      <label for="shipCost">Your shipping cost $</label>
+      <input type="number" id="shipCost" name="shipCost" step="0.01" min="0" value="3.50" required>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Etsy fees (US defaults)</legend>
+    <div class="field">
+      <label for="listingFee">Listing fee $</label>
+      <input type="number" id="listingFee" name="listingFee" step="0.01" min="0" value="0.20" required>
+    </div>
+    <div class="field">
+      <label for="transPct">Transaction fee %</label>
+      <input type="number" id="transPct" name="transPct" step="0.01" min="0" max="100" value="6.5" required>
+    </div>
+    <div class="field">
+      <label for="payPct">Payment processing %</label>
+      <input type="number" id="payPct" name="payPct" step="0.01" min="0" max="100" value="3.0" required>
+    </div>
+    <div class="field">
+      <label for="payFixed">Payment processing fixed $</label>
+      <input type="number" id="payFixed" name="payFixed" step="0.01" min="0" value="0.25" required>
+    </div>
+    <div class="field">
+      <label for="adsPct">Offsite Ads fee % (0 if opted out)</label>
+      <input type="number" id="adsPct" name="adsPct" step="0.01" min="0" max="100" value="0" required>
+    </div>
+  </fieldset>
+</form>
+
+<div id="out" class="result" aria-live="polite"></div>
+
+<section class="how-it-works">
+  <h2>How it works</h2>
+  <p><strong>Total revenue</strong> = Sale price + Shipping charged to buyer</p>
+  <p><strong>Total fees</strong> = Listing fee + (Total revenue × Transaction fee %) + (Total revenue × Payment processing % + Payment processing fixed) + (Total revenue × Offsite Ads fee %)</p>
+  <p><strong>Total costs</strong> = COGS + Your shipping cost + Total fees</p>
+  <p><strong>Profit</strong> = Total revenue − Total costs</p>
+  <p><strong>Margin</strong> = (Profit ÷ Total revenue) × 100%</p>
+</section>
+
+<section class="faq">
+  <h2>FAQ</h2>
+  <dl>
+    <dt>Does this include the regulatory operating fee?</dt>
+    <dd>No. Some countries add a regulatory operating fee (e.g., UK, France, Spain). Add it manually to your costs if it applies.</dd>
+    <dt>What if I use Etsy Payments vs. PayPal?</dt>
+    <dd>The payment processing fields cover the typical Etsy Payments rate (3% + $0.25 US). Adjust the percentage and fixed fee to match your processor.</dd>
+    <dt>Why is my margin lower than expected?</dt>
+    <dd>Check that you included your actual shipping cost, not just the amount charged. Also verify the Offsite Ads fee — sales from offsite ads incur 12–15% if you’re opted in.</dd>
+  </dl>
+</section><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>(function () {
+  const form = document.getElementById('calc');
+  const out = document.getElementById('out');
+
+  function fmt(n) {
+    return '$' + n.toFixed(2);
+  }
+
+  function pct(n) {
+    return n.toFixed(2) + '%';
+  }
+
+  function readNumber(id) {
+    const el = document.getElementById(id);
+    const v = parseFloat(el.value);
+    return Number.isFinite(v) && v >= 0 ? v : null;
+  }
+
+  function calculate() {
+    const sale = readNumber('salePrice');
+    const shipCharged = readNumber('shipCharged');
+    const cogs = readNumber('cogs');
+    const shipCost = readNumber('shipCost');
+    const listing = readNumber('listingFee');
+    const transPct = readNumber('transPct');
+    const payPct = readNumber('payPct');
+    const payFixed = readNumber('payFixed');
+    const adsPct = readNumber('adsPct');
+
+    const inputs = [sale, shipCharged, cogs, shipCost, listing, transPct, payPct, payFixed, adsPct];
+    if (inputs.some(v => v === null)) {
+      out.innerHTML = '<p class="msg">Please fill in all fields with valid numbers.</p>';
+      return;
+    }
+
+    const revenue = sale + shipCharged;
+    const transFee = revenue * (transPct / 100);
+    const payFee = revenue * (payPct / 100) + payFixed;
+    const adsFee = revenue * (adsPct / 100);
+    const totalFees = listing + transFee + payFee + adsFee;
+    const totalCosts = cogs + shipCost + totalFees;
+    const profit = revenue - totalCosts;
+    const margin = revenue > 0 ? (profit / revenue) * 100 : 0;
+
+    out.innerHTML = `
+      <div class="result-grid">
+        <div><strong>Total revenue</strong><br>${fmt(revenue)}</div>
+        <div><strong>Total fees</strong><br>${fmt(totalFees)}</div>
+        <div><strong>Total costs</strong><br>${fmt(totalCosts)}</div>
+        <div class="profit"><strong>Profit</strong><br>${fmt(profit)}</div>
+        <div class="margin"><strong>Margin</strong><br>${pct(margin)}</div>
+      </div>
+      <details class="fee-breakdown">
+        <summary>Fee breakdown</summary>
+        <ul>
+          <li>Listing fee: ${fmt(listing)}</li>
+          <li>Transaction fee (${pct(transPct)}): ${fmt(transFee)}</li>
+          <li>Payment processing (${pct(payPct)} + ${fmt(payFixed)}): ${fmt(payFee)}</li>
+          <li>Offsite Ads fee (${pct(adsPct)}): ${fmt(adsFee)}</li>
+        </ul>
+      </details>
+    `;
+  }
+
+  form.addEventListener('input', calculate);
+  calculate();
+})();</script></body></html>
