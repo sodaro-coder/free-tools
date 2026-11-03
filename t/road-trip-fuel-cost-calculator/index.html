@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Road Trip Fuel Cost Calculator</title><meta name='description' content='Calculate your road trip fuel cost quickly. Enter distance, fuel price, and car efficiency.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Road Trip Fuel Cost Calculator</h1><form>
+  <label>Distance (miles): <input type="number" id="dist" value="500" min="0" step="10"></label><br><br>
+  <label>Fuel Price ($/gallon): <input type="number" id="price" value="3.50" min="0" step="0.1" ></label><br><br>
+  <label>Vehicle Efficiency (mpg): <input type="number" id="mpg" value="25" min="1" step="1"></label><br><br>
+  <div id="out">Estimated fuel cost: $70.00</div>
+</form>
+
+<h3>How it works</h3>
+<p>Formula: (Distance ÷ MPG) × Fuel Price = Fuel Cost</p>
+
+<h3>FAQ</h3>
+<p>1. What units should I use? Distance in miles, fuel price in dollars per gallon, efficiency in miles per gallon.</p>
+<p>2. Can I calculate for multiple vehicles? Enter one set of values at a time.</p>
+<p>3. What if I have liters or kilometers? Convert first: 1 gallon = 3.785 liters, 1 mile = 1.609 km.</p><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>document.querySelectorAll('input').forEach(function(el) {
+  el.addEventListener('input', calculate);
+});
+function calculate() {
+  var dist = parseFloat(document.getElementById('dist').value);
+  var price = parseFloat(document.getElementById('price').value);
+  var mpg = parseFloat(document.getElementById('mpg').value);
+  var out = document.getElementById('out');
+  if (isNaN(dist) || isNaN(price) || isNaN(mpg) || dist === '' || price === '' || mpg === '') {
+    out.textContent = 'Please enter valid numbers for all fields.';
+    return;
+  }
+  if (dist < 0 || price < 0 || mpg <= 0) {
+    out.textContent = 'Values must be positive, and MPG must be greater than zero.';
+    return;
+  }
+  var cost = (dist / mpg) * price;
+  out.textContent = 'Estimated fuel cost: $' + cost.toFixed(2);
+}
+calculate();</script></body></html>
