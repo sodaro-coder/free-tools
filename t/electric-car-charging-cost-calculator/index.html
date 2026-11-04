@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><title>Electric Car Charging Cost Calculator</title><meta name='description' content='Calculate your electric car charging cost per mile and per full charge.'><meta name='theme-color' content='#0b0d10'><style>:root{color-scheme:dark light;--bg:#0b0d10;--card:#141920;--line:#243040;--ink:#e8eef2;--mute:#8a99a8;--acc:#7fd8ff;--field:#0d1117;--ok:#0f2a1f;--okline:#1f6b4a}@media (prefers-color-scheme:light){:root{--bg:#f6f8fb;--card:#fff;--line:#d5dee9;--ink:#15202b;--mute:#5a6876;--acc:#0b6aa8;--field:#fff;--ok:#e8f7ef;--okline:#7cc7a0}}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:clamp(16px,1rem + .2vw,18px)/1.6 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow-wrap:break-word}.w{max-width:760px;margin:0 auto;padding:clamp(14px,4vw,28px) clamp(16px,4vw,24px) 48px}a{color:var(--acc);text-underline-offset:3px}h1{font-size:clamp(1.55rem,1.2rem + 2vw,2.2rem);line-height:1.2;margin:.3em 0 .5em;text-wrap:balance}h2,h3{line-height:1.25}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}form>*{min-width:0}label{display:grid;gap:4px;font-weight:600}input,select,textarea{font:inherit;font-size:max(16px,1em);width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--field);color:var(--ink)}input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}button,input[type=submit],input[type=button]{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:0;background:var(--acc);color:#04121c;cursor:pointer}#out{margin:16px 0;padding:16px;border-radius:16px;background:var(--ok);border:1px solid var(--okline);font-size:1.15em;font-weight:700;overflow-x:auto}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{padding:6px 10px;border-bottom:1px solid var(--line)}img{max-width:100%;height:auto}.tools{list-style:none;padding:0;display:grid;gap:12px}.tools li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.tools a{font-weight:700;font-size:1.05em;display:inline-block;padding:4px 0}.tools small{color:var(--mute)}.lead{color:var(--mute)}header{display:flex;align-items:center;min-height:44px}header a{font-weight:700;text-decoration:none;padding:10px 0}header,footer{color:var(--mute);font-size:.9em}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:12px}footer a,.tip a{display:inline-block;padding:8px 0}</style></head><body><div class='w'><header><a href='../../'>← Free tools</a></header><main><h1>Electric Car Charging Cost Calculator</h1><form>
+  <label>Electricity rate (cents/kWh): <input type="number" id="rate" value="13" step="0.01" min="0"></label><br><br>
+  <label>Vehicle efficiency (kWh/mile): <input type="number" id="eff" value="0.3" step="0.01" min="0"></label><br><br>
+  <label>Battery capacity (kWh): <input type="number" id="cap" value="60" step="1" min="0"></label><br><br>
+  <div id="out">Enter values to calculate</div>
+</form>
+
+<h3>How it works</h3>
+<p>Cost per mile = (rate in $/kWh) × (efficiency in kWh/mile)<br>
+Cost per full charge = rate × capacity<br>
+Example: 13¢/kWh × 0.3 kWh/mile = 3.9¢/mile</p>
+
+<h3>FAQ</h3>
+<p>1. What if I don't know my efficiency? Most EVs use 0.25-0.35 kWh/mile.<br>
+2. Does this include home charger costs? No, only electricity usage.<br>
+3. How accurate is this? It's an estimate based on your inputs.</p><p class='tip'>Useful? <a href='https://paypal.me/AaronSodaro'>Buy me a coffee</a>. It keeps these tools free.</p></main><footer>Free, no sign-up, nothing you type leaves your browser. Results are estimates; check anything important. Made with the help of AI.</footer></div><script>document.querySelectorAll('input').forEach(el => el.addEventListener('input', calculate));
+function calculate() {
+  const rate = parseFloat(document.getElementById('rate').value);
+  const eff = parseFloat(document.getElementById('eff').value);
+  const cap = parseFloat(document.getElementById('cap').value);
+  if (isNaN(rate) || isNaN(eff) || isNaN(cap) || rate < 0 || eff < 0 || cap < 0) {
+    document.getElementById('out').textContent = 'Please enter valid positive numbers';
+    return;
+  }
+  const costPerMile = (rate / 100) * eff;
+  const costPerCharge = (rate / 100) * cap;
+  document.getElementById('out').innerHTML = 
+    'Cost per mile: $' + costPerMile.toFixed(4) + '<br>' +
+    'Cost per full charge: $' + costPerCharge.toFixed(2);
+}
+calculate();</script></body></html>
